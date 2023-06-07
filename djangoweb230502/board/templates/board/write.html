@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>글쓰기</h2>
+<form action="/insert/" method="post" enctype="multipart/form-data">
+
+{% csrf_token %}
+<div>이름 <input type="text" name="writer" size="80" value={{user.username}}></div>
+<div>제목 <input type="text" name="title" size="80"></div>
+<div style="width:800px">내용 <textarea name="content" rows="3" cols=80></textarea></div>
+<div style="width:800px">첨부파일 
+	<input name="file" type="file" size="80">
+</div>
+<div style="width:800px; text-align:center">
+	<button type="submit">확인</button>
+</div>
+</form>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function home(){
+	location.href="/list/";
+}
+function update(){
+	document.form1.action="/update/";
+	document.form1.submit();
+}
+function del(){
+	if(confirm("삭제하겠습니까?")){
+		document.form1.action="/delete/";
+		document.form1.submit();
+	}
+}
+</script>
+</head>
+<body>
+<h2>글쓰기</h2>
+<form method="post" name="form1" enctype="multipart/form-data">
+
+{% csrf_token %}
+<div>번호 <input type="text" name="idx" size="80" value={{dto.idx}} readonly></div>
+<div>이름 <input type="text" name="writer" size="80" value={{dto.writer}}></div>
+<div>제목 <input type="text" name="title" size="80" value={{dto.title}}></div>
+<div>조회수 <input type="text" name="hit" size="80" value={{dto.hit}}></div>
+<div>날짜 <input type="text" name="post_date" size="80" value={{dto.post_date}}></div>
+<div style="width:800px">내용 <textarea name="content" rows="3" cols=80>{{dto.content}}</textarea></div>
+<div style="width:800px">첨부파일 
+	{% if dto.filesize > 0 %}
+	<a href="/download?idx={{dto.idx}}">{{dto.filename}} ({{dto.filesize}}KB)</a>
+	{% endif %}
+	<input name="file" type="file" size="80">
+</div>
+<div style="width:800px; text-align:center">
+	<input type="button" value="목록" onclick="home()">
+	{% if dto.writer == uesr.username %} 
+	<input type="button" value="수정" onclick="update()">
+	<input type="button" value="삭제" onclick="del()">
+	{% endif %}
+</div>
+</form>
+<!-- 댓글 영역 -->
+<h2>댓글 작성 영역</h2>
+<form method="post" action="/reply_insert/">
+{% csrf_token %}
+<input name="writer" placeholder="name"><br>
+<textarea name="content" rows="3" cols="80" placeholder="댓글 내용"></textarea>
+<input type="hidden" name="idx" value="{{dto.idx}}">
+<button>댓글쓰기</button>
+</form>
+<h2>댓글 리스트 영역</h2>
+<table border="1" width="700px">
+{% for row in commentList %}
+<tr><td>
+<b>{{row.writer}}</b> ({{row.post_date}})<br>
+{{row.content}}
+</td></tr>
+{% endfor %}
+</table>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

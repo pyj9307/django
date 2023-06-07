@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>Sign up</h1>
+
+<form method="post" action="/signup/">
+{% csrf_token %}
+UserName : <br>
+<input type="text" name="username" value=""><br>
+Password : <br>
+<input type="password" name="password" value=""><br>
+Confirm Password : <br>
+<input type="password" name="password2" value=""><br>
+Email :<br>
+<input type="text" name="email"><br><br>
+<input type="submit" value="sign up">
+</form>
+</body>
+</html>

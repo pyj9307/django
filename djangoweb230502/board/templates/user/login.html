@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>Login</h1>
+<form method="post" action="/login/">
+{% csrf_token %}
+UserName : <br>
+<input type="text" name="username" value=""><br>
+Password : <br>
+<input type="password" name="password" value=""><br>
+<input class="btn btn-primary" type="submit" value="Login">
+<input class="btn btn-primary" type="button" value="sign up" onclick="location.href='/signup_form'">
+
+</form>
+
+</body>
+</html>
